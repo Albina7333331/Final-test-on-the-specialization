@@ -1,0 +1,33 @@
+ 1. Используя команду cat в терминале операционной системы Linux, создать
+два файла Домашние животные (заполнив файл собаками, кошками,
+хомяками) и Вьючные животными заполнив файл Лошадьми, верблюдами и
+ослы), а затем объединить их. Просмотреть содержимое созданного файла.
+Переименовать файл, дав ему новое имя (Друзья человека).
+1951  cat >Pets.txt
+ 1952  cat >Pack_animals.txt
+ 1953  cat Pack_animals.txt
+ 1954  cat Pets.txt
+ 1955  cat Pets.txt Pack_animals.txt >new_file.txt
+ 
+ Переименовать файл, дав ему новое имя (Друзья человека).
+ 1956  mv new_file.txt Human_Friends.txt
+ 
+ Просмотреть содержимое созданного файла.
+ 1957  cat Human_Friends.txt
+ 1958  ls
+ 2. Создать директорию, переместить файл туда.
+ 1959  mkdir Pets
+ 1960  mv Human_Friends.txt Pets
+ 1961  ls
+ 1962  cd Pets
+ 1963  ls
+ 3. Подключить дополнительный репозиторий MySQL. Установить любой пакет
+из этого репозитория.
+ 1964  sudo apt update
+ 1965  sudo apt install mysql-server mysql-client
+ 1969  sudo apt install mysql-server mysql-client
+ 1970  mysqladmin password -u root -p
+ 
+
+
+
