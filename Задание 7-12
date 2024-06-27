@@ -1,0 +1,356 @@
+
+
+mysql> CREATE DATABASE IF NOT EXISTS `HumanFriends`;
+Query OK, 1 row affected (0,02 sec)
+
+mysql> USE `HumanFriends`;
+Database changed
+mysql> CREATE TABLE `Animals` (
+    ->     `ID` INT AUTO_INCREMENT PRIMARY KEY,
+    ->     `Name` VARCHAR(50) NOT NULL,
+    ->     `Type` VARCHAR(50) NOT NULL,
+    ->     `BirthDate` DATE,
+    ->     `Commands` TEXT
+    -> );
+Query OK, 0 rows affected (0,05 sec)
+
+mysql> CREATE TABLE `Pets` (
+    ->     `ID` INT AUTO_INCREMENT PRIMARY KEY,
+    ->     `Name` VARCHAR(50) NOT NULL,
+    ->     `Type` VARCHAR(50) NOT NULL,
+    ->     `BirthDate` DATE,
+    ->     `Commands` TEXT,
+    ->     `AnimalID` INT,
+    ->     FOREIGN KEY (`AnimalID`) REFERENCES `Animals`(`ID`)
+    -> );
+Query OK, 0 rows affected (0,06 sec)
+
+mysql> 
+mysql> CREATE TABLE `PackAnimals` (
+    ->     `ID` INT AUTO_INCREMENT PRIMARY KEY,
+    ->     `Name` VARCHAR(50) NOT NULL,
+    ->     `Type` VARCHAR(50) NOT NULL,
+    ->     `BirthDate` DATE,
+    ->     `Commands` TEXT,
+    ->     `AnimalID` INT,
+    ->     FOREIGN KEY (`AnimalID`) REFERENCES `Animals`(`ID`)
+    -> );
+Query OK, 0 rows affected (0,07 sec)
+
+mysql> CREATE TABLE `Dogs` (
+    ->     `ID` INT AUTO_INCREMENT PRIMARY KEY,
+    ->     `PetID` INT,
+    ->     FOREIGN KEY (`PetID`) REFERENCES `Pets`(`ID`)
+    -> );
+Query OK, 0 rows affected (0,06 sec)
+
+mysql> CREATE TABLE `Cats` (
+    ->     `ID` INT AUTO_INCREMENT PRIMARY KEY,
+    ->     `PetID` INT,
+    ->     FOREIGN KEY (`PetID`) REFERENCES `Pets`(`ID`)
+    -> );
+Query OK, 0 rows affected (0,06 sec)
+
+mysql> CREATE TABLE `Hamsters` (
+    ->     `ID` INT AUTO_INCREMENT PRIMARY KEY,
+    ->     `PetID` INT,
+    ->     FOREIGN KEY (`PetID`) REFERENCES `Pets`(`ID`)
+    -> );
+Query OK, 0 rows affected (0,06 sec)
+
+mysql> CREATE TABLE `Horses` (
+    ->     `ID` INT AUTO_INCREMENT PRIMARY KEY,
+    ->     `PackAnimalID` INT,
+    ->     FOREIGN KEY (`PackAnimalID`) REFERENCES `PackAnimals`(`ID`)
+    -> );
+Query OK, 0 rows affected (0,07 sec)
+
+mysql> CREATE TABLE `Camels` (
+    ->     `ID` INT AUTO_INCREMENT PRIMARY KEY,
+    ->     `PackAnimalID` INT,
+    ->     FOREIGN KEY (`PackAnimalID`) REFERENCES `PackAnimals`(`ID`)
+    -> );
+Query OK, 0 rows affected (0,06 sec)
+
+mysql> CREATE TABLE `Donkeys` (
+    ->     `ID` INT AUTO_INCREMENT PRIMARY KEY,
+    ->     `PackAnimalID` INT,
+    ->     FOREIGN KEY (`PackAnimalID`) REFERENCES `PackAnimals`(`ID`)
+    -> );
+Query OK, 0 rows affected (0,06 sec)
+
+mysql> INSERT INTO `Animals` (`Name`, `Type`, `BirthDate`, `Commands`) VALUES
+    -> ('Reks', 'Dog', '2022-01-10', 'Sit, Stay'),
+    -> ('Laika', 'Dog', '2021-07-22', 'Fetch'),
+    -> ('Vii', 'Dog', '2021-07-22', 'Fetch, Bark'),
+    -> ('Volk', 'Dog', '2021-07-22', 'Fetch, Stay');
+Query OK, 4 rows affected (0,02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO `Pets` (`Name`, `Type`, `BirthDate`, `Commands`, `AnimalID`) VALUES
+    -> ('Reks', 'Dog', '2022-01-10', 'Sit, Stay', 1),
+    -> ('Laika', 'Dog', '2021-07-22', 'Fetch', 2),
+    -> ('Vii', 'Dog', '2021-07-22', 'Fetch, Bark', 3),
+    -> ('Volk', 'Dog', '2021-07-22', 'Fetch, Stay', 4);
+Query OK, 4 rows affected (0,02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO `Dogs` (`PetID`) VALUES
+    -> (1),
+    -> (2),
+    -> (3),
+    -> (4);
+Query OK, 4 rows affected (0,02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO `Animals` (`Name`, `Type`, `BirthDate`, `Commands`) VALUES
+    -> ('Myrka', 'Cat', '2020-04-10', 'Sit, Stay'),
+    -> ('Alisa', 'Cat', '2023-09-20', 'Meow'),
+    -> ('Barsik', 'Cat', '2022-08-11', 'Walk, Meow'),
+    -> ('Milka', 'Cat', '2019-06-24', 'Pounce, Stay');
+Query OK, 4 rows affected (0,01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO `Pets` (`Name`, `Type`, `BirthDate`, `Commands`, `AnimalID`) VALUES
+    -> ('Myrka', 'Cat', '2020-04-10', 'Sit, Stay', 1),
+    -> ('Alisa', 'Cat', '2023-09-20', 'Meow', 2),
+    -> ('Barsik', 'Cat', '2022-08-11', 'Walk, Meow', 3),
+    -> ('Milka', 'Cat', '2019-06-24', 'Pounce, Stay', 4);
+Query OK, 4 rows affected (0,02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO `Cats` (`PetID`) VALUES
+    -> (1),
+    -> (2),
+    -> (3),
+    -> (4);
+Query OK, 4 rows affected (0,02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO `Animals` (`Name`, `Type`, `BirthDate`, `Commands`) VALUES
+    -> ('Ivan', 'Hamster', '2023-09-10', 'Spin, Roll'),
+    -> ('Grisha', 'Hamster', '2022-09-23', 'Hide'),
+    -> ('Laska', 'Hamster', '2022-10-11', 'Hide, Roll');
+Query OK, 3 rows affected (0,02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO `Pets` (`Name`, `Type`, `BirthDate`, `Commands`, `AnimalID`) VALUES
+    -> ('Ivan', 'Hamster', '2023-09-10', 'Spin, Roll', 1),
+    -> ('Grisha', 'Hamster', '2022-09-23', 'Hide', 2),
+    -> ('Laska', 'Hamster', '2022-10-11', 'Hide, Roll', 3);
+Query OK, 3 rows affected (0,01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO `Hamsters` (`PetID`) VALUES
+    -> (1),
+    -> (2),
+    -> (3);
+Query OK, 3 rows affected (0,02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE Animals;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| ID        | int         | NO   | PRI | NULL    | auto_increment |
+| Name      | varchar(50) | NO   |     | NULL    |                |
+| Type      | varchar(50) | NO   |     | NULL    |                |
+| BirthDate | date        | YES  |     | NULL    |                |
+| Commands  | text        | YES  |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+5 rows in set (0,00 sec)
+
+mysql> DESCRIBE Pets;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| ID        | int         | NO   | PRI | NULL    | auto_increment |
+| Name      | varchar(50) | NO   |     | NULL    |                |
+| Type      | varchar(50) | NO   |     | NULL    |                |
+| BirthDate | date        | YES  |     | NULL    |                |
+| Commands  | text        | YES  |     | NULL    |                |
+| AnimalID  | int         | YES  | MUL | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+6 rows in set (0,00 sec)
+
+mysql> DESCRIBE Dogs;
++-------+------+------+-----+---------+----------------+
+| Field | Type | Null | Key | Default | Extra          |
++-------+------+------+-----+---------+----------------+
+| ID    | int  | NO   | PRI | NULL    | auto_increment |
+| PetID | int  | YES  | MUL | NULL    |                |
++-------+------+------+-----+---------+----------------+
+2 rows in set (0,00 sec)
+
+mysql> SELECT * FROM Pets;
++----+--------+---------+------------+--------------+----------+
+| ID | Name   | Type    | BirthDate  | Commands     | AnimalID |
++----+--------+---------+------------+--------------+----------+
+|  1 | Reks   | Dog     | 2022-01-10 | Sit, Stay    |        1 |
+|  2 | Laika  | Dog     | 2021-07-22 | Fetch        |        2 |
+|  3 | Vii    | Dog     | 2021-07-22 | Fetch, Bark  |        3 |
+|  4 | Volk   | Dog     | 2021-07-22 | Fetch, Stay  |        4 |
+|  5 | Myrka  | Cat     | 2020-04-10 | Sit, Stay    |        1 |
+|  6 | Alisa  | Cat     | 2023-09-20 | Meow         |        2 |
+|  7 | Barsik | Cat     | 2022-08-11 | Walk, Meow   |        3 |
+|  8 | Milka  | Cat     | 2019-06-24 | Pounce, Stay |        4 |
+|  9 | Ivan   | Hamster | 2023-09-10 | Spin, Roll   |        1 |
+| 10 | Grisha | Hamster | 2022-09-23 | Hide         |        2 |
+| 11 | Laska  | Hamster | 2022-10-11 | Hide, Roll   |        3 |
++----+--------+---------+------------+--------------+----------+
+11 rows in set (0,00 sec)
+
+mysql> 
+
+mysql> INSERT INTO `Animals` (`Name`, `Type`, `BirthDate`, `Commands`) VALUES
+    -> ('Angel', 'horse', '2018-04-10', 'Trop, Canter'),
+    -> ('Byran', 'horse', '2016-09-25', 'Gallop'),
+    -> ('Vikont', 'horse', '2015-08-05', 'Walk, Jump'),
+    -> ('Zakat', 'horse', '2017-06-11', 'Trop, Gallop');
+Query OK, 4 rows affected (0,02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO `Pets` (`Name`, `Type`, `BirthDate`, `Commands`, `AnimalID`) VALUES
+    -> ('Angel', 'horse', '2018-04-10', 'Trop, Canter', 1),
+    -> ('Byran', 'horse', '2016-09-25', 'Gallop', 2),
+    -> ('Vikont', 'horse', '2015-08-05', 'Walk, Jump', 3),
+    -> ('Zakat', 'horse', '2017-06-11', 'Trop, Gallop', 4);
+Query OK, 4 rows affected (0,02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO `PackAnimals` (`Name`, `Type`, `BirthDate`, `Commands`, `AnimalID`) VALUES
+    -> ('Angel', 'horse', '2018-04-10', 'Trop, Canter', 1),
+    -> ('Byran', 'horse', '2016-09-25', 'Gallop', 2),
+    -> ('Vikont', 'horse', '2015-08-05', 'Walk, Jump', 3),
+    -> ('Zakat', 'horse', '2017-06-11', 'Trop, Gallop', 4);
+Query OK, 4 rows affected (0,01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO `Horses` (`PackAnimalID`) VALUES
+    -> (1),
+    -> (2),
+    -> (3),
+    -> (4);
+Query OK, 4 rows affected (0,02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO `Animals` (`Name`, `Type`, `BirthDate`, `Commands`) VALUES
+    -> ('Lila', 'Camel', '2010-04-10', 'Carry Load, Sit'),
+    -> ('Omlet', 'Camel', '2013-09-25', 'Walk'),
+    -> ('Rokfor', 'Camel', '2012-08-05', 'Walk, Sit'),
+    -> ('All', 'Camel', '2019-06-11', 'Gob, Carry Load');
+Query OK, 4 rows affected (0,02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO `PackAnimals` (`Name`, `Type`, `BirthDate`, `Commands`, `AnimalID`) VALUES
+    -> ('Lila', 'Camel', '2010-04-10', 'Carry Load, Sit', 1),
+    -> ('Omlet', 'Camel', '2013-09-25', 'Walk', 2),
+    -> ('Rokfor', 'Camel', '2012-08-05', 'Walk, Sit', 3),
+    -> ('All', 'Camel', '2019-06-11', 'Gob, Carry Load', 4);
+Query OK, 4 rows affected (0,02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO `Camels` (`PackAnimalID`) VALUES
+    -> (1),
+    -> (2),
+    -> (3),
+    -> (4);
+Query OK, 4 rows affected (0,02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO `Animals` (`Name`, `Type`, `BirthDate`, `Commands`) VALUES
+    -> ('Roll', 'Donkey', '2015-09-10', 'Carry Load, Walk'),
+    -> ('Bond', 'Donkey', '2019-10-25', 'Bray'),
+    -> ('Luntik', 'Donkey', '2019-12-05', 'Walk, Kick'),
+    -> ('Mada', 'Donkey', '2021-09-17', 'Bray, Carry Load');
+Query OK, 4 rows affected (0,02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO `PackAnimals` (`Name`, `Type`, `BirthDate`, `Commands`, `AnimalID`) VALUES
+    -> ('Roll', 'Donkey', '2015-09-10', 'Carry Load, Walk', 1),
+    -> ('Bond', 'Donkey', '2019-10-25', 'Bray', 2),
+    -> ('Luntik', 'Donkey', '2019-12-05', 'Walk, Kick', 3),
+    -> ('Mada', 'Donkey', '2021-09-17', 'Bray, Carry Load', 4);
+Query OK, 4 rows affected (0,02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO `Donkeys` (`PackAnimalID`) VALUES
+    -> (1),
+    -> (2),
+    -> (3),
+    -> (4);
+Query OK, 4 rows affected (0,01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM Animals;
++----+--------+---------+------------+------------------+
+| ID | Name   | Type    | BirthDate  | Commands         |
++----+--------+---------+------------+------------------+
+|  1 | Reks   | Dog     | 2022-01-10 | Sit, Stay        |
+|  2 | Laika  | Dog     | 2021-07-22 | Fetch            |
+|  3 | Vii    | Dog     | 2021-07-22 | Fetch, Bark      |
+|  4 | Volk   | Dog     | 2021-07-22 | Fetch, Stay      |
+|  5 | Myrka  | Cat     | 2020-04-10 | Sit, Stay        |
+|  6 | Alisa  | Cat     | 2023-09-20 | Meow             |
+|  7 | Barsik | Cat     | 2022-08-11 | Walk, Meow       |
+|  8 | Milka  | Cat     | 2019-06-24 | Pounce, Stay     |
+|  9 | Ivan   | Hamster | 2023-09-10 | Spin, Roll       |
+| 10 | Grisha | Hamster | 2022-09-23 | Hide             |
+| 11 | Laska  | Hamster | 2022-10-11 | Hide, Roll       |
+| 12 | Angel  | horse   | 2018-04-10 | Trop, Canter     |
+| 13 | Byran  | horse   | 2016-09-25 | Gallop           |
+| 14 | Vikont | horse   | 2015-08-05 | Walk, Jump       |
+| 15 | Zakat  | horse   | 2017-06-11 | Trop, Gallop     |
+| 16 | Lila   | Camel   | 2010-04-10 | Carry Load, Sit  |
+| 17 | Omlet  | Camel   | 2013-09-25 | Walk             |
+| 18 | Rokfor | Camel   | 2012-08-05 | Walk, Sit        |
+| 19 | All    | Camel   | 2019-06-11 | Gob, Carry Load  |
+| 20 | Roll   | Donkey  | 2015-09-10 | Carry Load, Walk |
+| 21 | Bond   | Donkey  | 2019-10-25 | Bray             |
+| 22 | Luntik | Donkey  | 2019-12-05 | Walk, Kick       |
+| 23 | Mada   | Donkey  | 2021-09-17 | Bray, Carry Load |
++----+--------+---------+------------+------------------+
+23 rows in set (0,00 sec)
+
+mysql> SELECT * FROM Pets;
++----+--------+---------+------------+--------------+----------+
+| ID | Name   | Type    | BirthDate  | Commands     | AnimalID |
++----+--------+---------+------------+--------------+----------+
+|  1 | Reks   | Dog     | 2022-01-10 | Sit, Stay    |        1 |
+|  2 | Laika  | Dog     | 2021-07-22 | Fetch        |        2 |
+|  3 | Vii    | Dog     | 2021-07-22 | Fetch, Bark  |        3 |
+|  4 | Volk   | Dog     | 2021-07-22 | Fetch, Stay  |        4 |
+|  5 | Myrka  | Cat     | 2020-04-10 | Sit, Stay    |        1 |
+|  6 | Alisa  | Cat     | 2023-09-20 | Meow         |        2 |
+|  7 | Barsik | Cat     | 2022-08-11 | Walk, Meow   |        3 |
+|  8 | Milka  | Cat     | 2019-06-24 | Pounce, Stay |        4 |
+|  9 | Ivan   | Hamster | 2023-09-10 | Spin, Roll   |        1 |
+| 10 | Grisha | Hamster | 2022-09-23 | Hide         |        2 |
+| 11 | Laska  | Hamster | 2022-10-11 | Hide, Roll   |        3 |
+| 12 | Angel  | horse   | 2018-04-10 | Trop, Canter |        1 |
+| 13 | Byran  | horse   | 2016-09-25 | Gallop       |        2 |
+| 14 | Vikont | horse   | 2015-08-05 | Walk, Jump   |        3 |
+| 15 | Zakat  | horse   | 2017-06-11 | Trop, Gallop |        4 |
++----+--------+---------+------------+--------------+----------+
+15 rows in set (0,00 sec)
+
+mysql> SELECT * FROM PackAnimals;
++----+--------+--------+------------+------------------+----------+
+| ID | Name   | Type   | BirthDate  | Commands         | AnimalID |
++----+--------+--------+------------+------------------+----------+
+|  1 | Angel  | horse  | 2018-04-10 | Trop, Canter     |        1 |
+|  2 | Byran  | horse  | 2016-09-25 | Gallop           |        2 |
+|  3 | Vikont | horse  | 2015-08-05 | Walk, Jump       |        3 |
+|  4 | Zakat  | horse  | 2017-06-11 | Trop, Gallop     |        4 |
+|  5 | Lila   | Camel  | 2010-04-10 | Carry Load, Sit  |        1 |
+|  6 | Omlet  | Camel  | 2013-09-25 | Walk             |        2 |
+|  7 | Rokfor | Camel  | 2012-08-05 | Walk, Sit        |        3 |
+|  8 | All    | Camel  | 2019-06-11 | Gob, Carry Load  |        4 |
+|  9 | Roll   | Donkey | 2015-09-10 | Carry Load, Walk |        1 |
+| 10 | Bond   | Donkey | 2019-10-25 | Bray             |        2 |
+| 11 | Luntik | Donkey | 2019-12-05 | Walk, Kick       |        3 |
+| 12 | Mada   | Donkey | 2021-09-17 | Bray, Carry Load |        4 |
++----+--------+--------+------------+------------------+----------+
+12 rows in set (0,00 sec)
+
+
